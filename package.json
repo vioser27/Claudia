@@ -1,0 +1,18 @@
+{
+  "name": "claudia",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Claudia — your one-shot internship application assistant, powered by Claude.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "latest",
+    "next": "^15.5.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "unpdf": "^1.0.0"
+  }
+}
