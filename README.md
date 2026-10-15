@@ -1,4 +1,4 @@
-# Claudia ✦ your one-shot internship assistant
+# Claudia ✦ your internship assistant
 
 Upload your CV, paste a job link, and Claudia (powered by Claude) does the rest in one go:
 
@@ -19,27 +19,6 @@ Every application Claudia prepares is saved to a live **tracker board** (Draft �
 - **Live updates:** the board polls every few seconds; when a recruiter clicks, the card pulses and a toast pops up.
 - **Follow-ups:** open any card and ask Claudia to draft a follow-up based on what's happened. Cards with no activity for 3 days get a *Follow up?* nudge.
 
-Be upfront with users that their links are tracked, and keep it to their own outreach.
-
-## Run it
-
-```bash
-npm install
-cp .env.example .env.local
-npm run dev                  # http://localhost:3000
-```
-
-## Choosing the AI (`LLM_PROVIDER` in `.env.local`)
-
-| Mode | Needs | Notes |
-| --- | --- | --- |
-| `demo` | nothing | Plays back a pre-written run (fictional student + company). Upload any CV, any link. Great for rehearsing and as an offline backup. |
-| `gemini` | free key from [Google AI Studio](https://aistudio.google.com/apikey) | Real AI on your CV. No live web search, so the company brief uses the model's own knowledge. Free-tier data may be used by Google, so test with a sample CV. |
-| `anthropic` | `ANTHROPIC_API_KEY` | Claude with live web search. Use this for the hackathon itself. |
-
-## Deploy
-
-Push to GitHub, import into Vercel, and add `ANTHROPIC_API_KEY` as an environment variable. For the tracker, add an Upstash Redis / Vercel KV database (free tier) and set `KV_REST_API_URL` and `KV_REST_API_TOKEN`; Vercel's file system isn't persistent, so the local `.data/db.json` fallback only works on your machine. The API route sets `maxDuration = 300`; on Vercel's Hobby plan the limit may be lower, so check your plan if long runs get cut off.
 
 ## How it works
 
@@ -55,11 +34,3 @@ Push to GitHub, import into Vercel, and add `ANTHROPIC_API_KEY` as an environmen
 | `lib/extract.js` | PDF text extraction (`unpdf`) and job page fetching. |
 | `app/page.jsx` | The UI: intake, live timeline, results tabs, score ring and radar chart (hand-built SVG). |
 | `app/globals.css` | Styles, including a print stylesheet so "Download PDF" prints only the CV. |
-
-## Demo tips
-
-- **The tracker moment:** prepare an application, open the tracker, then open the tracked link on your phone. The card pulses into *Viewed CV* on the projector within a few seconds.
-
-- LinkedIn and some job boards block scraping, so use the "paste the description" option for those.
-- Do a dry run with your demo CV and job before you present. A full run takes about 1–2 minutes.
-- Model and web search version can be changed in `.env.local` (`CLAUDE_MODEL`, `WEB_SEARCH_TOOL`).
